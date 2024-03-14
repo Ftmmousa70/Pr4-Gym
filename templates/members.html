@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Member Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #909090;
+            background-image: url('http://127.0.0.1:8080/static/member.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: #008080;
+            background-color: #e3e2e292;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px auto; 
+            width: 20%; 
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background: #ffffff98;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #11e2cd;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #18ddc0;
+        }
+
+        #injury_description {
+            display: none; 
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var injuredCheckbox = document.getElementById('injured');
+            var injuryDescriptionInput = document.getElementById('injury_description');
+
+            injuredCheckbox.addEventListener('change', function () {
+                if (injuredCheckbox.checked) {
+                  
+                    injuryDescriptionInput.style.display = 'block';
+                } else {
+                   
+                    injuryDescriptionInput.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<h1>New Member Form</h1>
+
+<form method="POST" action="{{ url_for('members') }}">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required>
+
+    <label for="call">Phone number:</label>
+    <input type="text" id="call" name="call" maxlength="11">
+
+    <label for="injured">Injured:</label>
+    <input type="checkbox" id="injured" name="injured">
+
+    <label for="injury_description">Injury Description:</label>
+    <textarea id="injury_description" name="injury_description"></textarea>
+
+    <input type="submit" value="Submit">
+
+    </form>
+
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

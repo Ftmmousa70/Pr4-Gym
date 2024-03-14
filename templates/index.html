@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Club</title>
+    <style>
+    body {
+        background-image: url('http://127.0.0.1:8080/static/3.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;}
+
+        h1 {
+            color: #000000;
+            background-color: #ffffff69;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 10px auto; 
+            width: 50%; 
+        }
+
+        h2 {
+            color: #000000;
+            background-color: #ffffff67;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: left;
+            margin: 10px;
+            width: 13%; 
+        }
+
+        h3 {
+            color: #ffffff;
+            background-color: #ffffff66;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 10px auto; 
+            width: 30%; 
+        }
+
+        p {
+            font-family:'Times New Roman', Times, serif ;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #000000;
+            max-width: 800px;
+            background-color: #ffffff67;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 10px auto; 
+            width: 50%; 
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+            display: flex;
+            border-radius: 20px;
+            justify-content: space-evenly;
+            width: 100%;
+            text-align: left;
+            background-color: #ffffff69; 
+            margin: 0; 
+        }
+
+
+        li {
+            display: inline;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #ff0000;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .sports-image {
+            width: 50%; 
+            border-radius: 5px;
+        }
+
+        .sport-description {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the "TaneNaz" Sports Club</h1>
+    
+    <ul>
+        <li><a href="{{ url_for('members') }}">New Member</a></li>
+        <li><a href="{{ url_for('reservation') }}">Reservation</a></li>
+        <li><a href="{{ url_for('pay') }}">Pay</a></li>
+        <li><a href="{{ url_for('list') }}">List Of Registered Members</a></li>
+    </ul>
+
+
+    <p>
+       At our sports center, we offer a variety of fitness classes to meet your workout needs.
+       Whether you're into strength training, cardio, or a mix of both, we have something for everyone.
+       Check out our available sports and make a reservation to secure your spot!
+    </p>
+
+    <h2>Available Sports:</h2>
+
+    <ul>
+        <li>
+            <img class="sports-image" src="http://127.0.0.1:8080/static/Trx.jpg" alt="TRX">
+            <strong>TRX:</strong> is a form of suspension training that uses body weight exercises to develop strength, balance, flexibility, and core stability simultaneously. It requires the use of the TRX Suspension Trainer, a performance training tool that leverages gravity and the user's body weight to complete the exercises.
+        </li>
+        <li>
+            <img class="sports-image" src="http://127.0.0.1:8080/static/bodypump.jpg" alt="Bodypump">
+            <strong>Bodypump:</strong> is a fast-paced, barbell-based workout that's specifically designed to help you get lean, toned, and fit. It uses a combination of motivating music, fantastic instructors, and scientifically proven moves to help you achieve these targets more quickly than you would working out on your own.
+        </li>
+        <li>
+            <img class="sports-image" src="http://127.0.0.1:8080/static/bodystep.jpg" alt="Body Step">
+            <strong>Body Step:</strong> is an aerobic class that uses adjustable steps to get a great cardio workout that will have your blood flowing! This class incorporates all cardio blocks to help increase the amount of fat you burn during the workout.
+        </li>
+        <li>
+            <img class="sports-image" src="http://127.0.0.1:8080/static/crossfit.jpg" alt="CrossFit">
+            <strong>CrossFit:</strong> is a form of high-intensity interval training, CrossFit is a strength and conditioning workout that is made up of functional movement performed at a high intensity level. These movements are actions that you perform in your day-to-day life, like squatting, pulling, pushing, etc.
+        </li>
+    </ul>
+
+    <h3>Join us and start your fitness journey today!</h3>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('http://127.0.0.1:8080/static/reserve.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150vh;
+        }
+        h1 {
+            color: #008080;
+            background-color: #e3e2e292;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 400px;
+            background: #ffffffdd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, input[type="checkbox"], input[type="radio"] {
+            margin-bottom: 15px;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #1bdbd5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #12debc;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #sport {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff; 
+        }
+
+        #sport option:checked {
+            background-color: #12e3e6;
+            color: #fff;
+        }
+
+        #sport-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        #day-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        #day-options label {
+            margin-right: 15px;
+        }
+
+        #time-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        #time-options {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #time-options label {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sport Reservation</h1>
+
+    <form method="POST" action="{{ url_for('reservation') }}" >
+        {% if member_id %}
+        <input type="hidden" name="member_id" value="{{ member_id }}">
+        {% else %}
+        <label id="sport-title" for="member_id">Select member:</label>
+        <select id="sport" name="member_id" required>
+            {% for member in members %}
+            <option value="{{member.id}}">{{member.first_name}}{{member.last_name}}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+
+        <label id="sport-title" for="sport">Select Sport:</label>
+        <select id="sport" name="sport" required>
+            <option value="trx" data-cost="18.00">TRX - $18.00</option>
+            <option value="bodypump" data-cost="10.00">Bodypump - $10.00</option>
+            <option value="bodystep" data-cost="12.00">Body Step - $12.00</option>
+            <option value="crossfit" data-cost="20.00">CrossFit - $20.00</option>
+        </select>
+
+        <label for="day">Select Day:</label>
+        <div id="day">
+            <input type="radio" id="Saturday" name="day" value="Saturday" required>
+            <label for="Saturday">Saturday</label>
+
+            <input type="radio" id="Sunday" name="day" value="Sunday">
+            <label for="Sunday">Sunday</label>
+
+            <input type="radio" id="Monday" name="day" value="Monday">
+            <label for="Monday">Monday</label>
+
+            <input type="radio" id="Tuesday" name="day" value="Tuesday">
+            <label for="Tuesday">Tuesday</label>
+
+            <input type="radio" id="Wednesday" name="day" value="Wednesday">
+            <label for="Wednesday">Wednesday</label>
+
+            <input type="radio" id="Thursday" name="day" value="Thursday">
+            <label for="Thursday">Thursday</label>
+
+            <input type="radio" id="Friday" name="day" value="Friday">
+            <label for="Friday">Friday</label>
+        </div>
+
+        <label id="time-title" for="time">Select Time:</label>
+        <div id="time-options">
+        <input type="radio" id="time16" name="time" value="16" required>
+        <label for="time16">16:00</label>
+
+        <input type="radio" id="time17" name="time" value="17">
+        <label for="time17">17:00</label>
+
+        <input type="radio" id="time18" name="time" value="18">
+        <label for="time18">18:00</label>
+
+        <input type="radio" id="time19" name="time" value="19">
+        <label for="time19">19:00</label>
+
+        <input type="radio" id="time20" name="time" value="20">
+        <label for="time20">20:00</label>
+
+        <input type="radio" id="time21" name="time" value="21">
+        <label for="time21">21:00</label>
+    </div>
+
+    <button type="submit">Process To Pay</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var reservationForm = document.getElementById('reservationForm');
+    
+            reservationForm.addEventListener('submit', function (event) {
+                event.preventDefault();  // Prevent the default form submission
+    
+                // Get the form action URL
+                var formAction = reservationForm.action;
+    
+                // Redirect to the pay page
+                window.location.href = formAction.replace('reservation', 'pay');
+            });
+        });
+    </script>
+    
+
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

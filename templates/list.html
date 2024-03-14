@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+    <style>
+        body{
+            background-color: rgb(255, 255, 255);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #12ded7;
+        }
+
+        th {
+            background-color: rgba(46, 242, 242, 0.486);
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Injured</th>
+            <th>Injury Description</th>
+            <th>Time of Fill</th>
+            <th>Sport</th>
+            <th>Day of Week</th>
+            <th>Time</th>
+        </tr>
+        {% for member in members %}
+            {% for res in member.reservations %}
+                <tr>
+                    {% if loop.first %}
+                        <td rowspan="{{ member.reservations|length }}">{{ member.first_name }}</td>
+                        <td rowspan="{{ member.reservations|length }}">{{ member.last_name }}</td>
+                        <td rowspan="{{ member.reservations|length }}">{{ member.call }}</td>
+                        <td rowspan="{{ member.reservations|length }}">{{ member.injured }}</td>
+                        <td rowspan="{{ member.reservations|length }}">{{ member.injury_description }}</td>
+                        <td rowspan="{{ member.reservations|length }}">{{ member.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    {% endif %}
+                    <td>{{ res.sport }}</td>
+                    <td>{{ res.day }}</td>
+                    <td>{{ res.time }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
